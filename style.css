@@ -1,35 +1,153 @@
+/* 🌐 Base Layout */
 body {
-  font-family: Arial, sans-serif;
-  background: #f8faff;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e8efff, #f7faff);
   text-align: center;
   padding: 20px;
+  color: #333;
 }
+
 .container {
-  max-width: 600px;
+  max-width: 850px;
   margin: auto;
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeInContainer 1s ease;
 }
-input {
+
+@keyframes fadeInContainer {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  color: #004aad;
+  font-size: 1.7rem;
+  margin-bottom: 5px;
+}
+
+h2 {
+  color: #333;
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+input[type="text"] {
   display: block;
   margin: 10px auto;
   padding: 10px;
-  width: 80%;
+  width: 85%;
+  border: 1px solid #cfd7e3;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafbff;
+  transition: all 0.2s;
 }
+
+input[type="text"]:focus {
+  border-color: #004aad;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 74, 173, 0.3);
+}
+
+/* 🌟 Button Styling */
 button {
-  background: #0078d7;
+  background: #004aad;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 25px;
   border-radius: 8px;
   cursor: pointer;
+  margin-top: 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
+
 button:hover {
-  background: #005fa3;
+  background: #003580;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 53, 128, 0.3);
 }
+
+/* 🧩 Question Card Design */
 .question {
   text-align: left;
-  margin: 15px 0;
+  margin: 20px auto;
+  border: 1px solid #d0d7e2;
+  border-radius: 10px;
+  padding: 15px 20px;
+  background: #fafcff;
+  width: 95%;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  animation: fadeInQuestion 0.6s ease;
+}
+
+@keyframes fadeInQuestion {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Question Text */
+.question p {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* Option Alignment */
+.question label {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.question label:hover {
+  background: #eef3fc;
+}
+
+/* Bigger and Colored Radio Buttons */
+.question input[type="radio"] {
+  transform: scale(1.3);
+  margin-right: 10px;
+  accent-color: #004aad;
+}
+
+/* 🏁 Result Section */
+#result {
+  background: #f5f9ff;
+  border: 1px solid #d0d7e2;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 25px;
+  animation: fadeInResult 0.8s ease;
+}
+
+@keyframes fadeInResult {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+#score {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #004aad;
+}
+
+/* 🧠 Responsiveness */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+  .question {
+    width: 100%;
+  }
+  h1 {
+    font-size: 1.4rem;
+  }
 }
