@@ -24,6 +24,12 @@ function loadQuestions() {
 }
 
 function submitExam() {
+    const name = document.getElementById('name').value.trim();
+  const roll = document.getElementById('roll').value.trim();
+  if (!name || !roll) {
+    alert("Please enter your name and roll number!");
+    return;
+  }
   let score = 0;
   questions.forEach((q, i) => {
     const selected = document.querySelector(`input[name='q${i}']:checked`);
@@ -33,8 +39,9 @@ function submitExam() {
   document.getElementById('result').style.display = 'block';
   document.getElementById('score').textContent = `${score} / ${questions.length}`;
   window.finalScore = score;
+ sendToSheet(name, roll, score);
 }
-function sendToSheet(name, roll, score) {
+  function sendToSheet(name, roll, score) {
   const scriptURL = "https://script.google.com/macros/s/AKfycbyLFlR4UNjavRDcd7rAFFOBwtC2JfN7mWNaEA_WZHwqOaXrOGaFZnegi8xsbBR1xuBx/exec"; // your Apps Script URL
 
   fetch(scriptURL, {
