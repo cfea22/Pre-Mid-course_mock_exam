@@ -34,7 +34,20 @@ function submitExam() {
   document.getElementById('score').textContent = `${score} / ${questions.length}`;
   window.finalScore = score;
 }
+function sendToSheet(name, roll, score) {
+  const scriptURL = "hhttps://script.google.com/macros/s/AKfycbyLFlR4UNjavRDcd7rAFFOBwtC2JfN7mWNaEA_WZHwqOaXrOGaFZnegi8xsbBR1xuBx/exec"; // your Apps Script URL
 
+  fetch(scriptURL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name, roll, score })
+  })
+  .then(() => console.log("✅ Result sent to Google Sheet"))
+  .catch(err => console.error("❌ Error sending data", err));
+}
 function downloadScore() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
