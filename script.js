@@ -38,13 +38,65 @@ function submitExam() {
 function downloadScore() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  const name = document.getElementById('name').value;
-  const roll = document.getElementById('roll').value;
+
+  const name = document.getElementById('name').value.trim();
+  const roll = document.getElementById('roll').value.trim();
+  const score = window.finalScore;
+
+  // 🎓 Header branding
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(16);
   doc.text("The Career Foundation Educational Academy", 20, 20);
-  doc.text("Pre-Mid Course Mock Test 2025", 20, 30);
-  doc.text(`Name: ${name}`, 20, 50);
-  doc.text(`Roll No: ${roll}`, 20, 60);
-  doc.text(`Score: ${window.finalScore} / 50`, 20, 70);
-  doc.text("Instructor: Yumnam Bikramjit Singh (CFEA)", 20, 90);
-  doc.save(`${roll}_CFEA_Scorecard.pdf`);
+  doc.setFontSize(12);
+  doc.setFont("helvetica", "normal");
+  doc.text("Napet Palli, Imphal East - 795010", 20, 28);
+  doc.text("Registration No. 425 under I.T Act 1889 & Registration Act 1908", 20, 35);
+  doc.line(20, 38, 190, 38);
+
+  // 🧾 Exam details
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(14);
+  doc.text("Pre-Mid Course Mock Test 2025", 20, 50);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(12);
+  doc.text("6 Months Primary Teachers Training Course", 20, 58);
+  doc.line(20, 60, 190, 60);
+
+  // 🧍 Student Information
+  doc.setFontSize(12);
+  doc.text(`Full Name: ${name}`, 20, 75);
+  doc.text(`Roll Number: ${roll}`, 20, 83);
+  doc.text(`Total Marks: 50`, 20, 91);
+  doc.text(`Marks Obtained: ${score}`, 20, 99);
+
+  // 💬 Professional remark
+  let remark = "";
+  if (score >= 45) remark = "Excellent performance. Keep it up!";
+  else if (score >= 35) remark = "Good work. You can do even better!";
+  else remark = "Needs improvement. Review your notes regularly.";
+
+  doc.setFont("helvetica", "italic");
+  doc.text(`Remarks: ${remark}`, 20, 115);
+
+  // 🪶 Footer line (branded and professional)
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(10);
+  doc.setTextColor(100);
+  doc.line(20, 270, 190, 270);
+  doc.text(
+    "Keep this scorecard for your future reference.",
+    20,
+    278
+  );
+  doc.setFont("helvetica", "italic");
+  doc.text(
+    "Powered by Yumnam Bikramjit Singh, Computer Instructor - CFEA",
+    20,
+    285
+  );
+
+  // 🖨️ Save file
+  const filename = `${roll}_CFEA_Scorecard.pdf`;
+  doc.save(filename);
 }
