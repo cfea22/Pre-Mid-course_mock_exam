@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pre-Mid Course Mock Test 2025 | CFEA</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const examTime = new Date('October 7, 2025 14:00:00').getTime();
+    const currentTime = new Date().getTime();
+    
+    if (currentTime < examTime) {
+        const btn = document.querySelector('#startExamBtn, button[onclick*="start"]');
+        if (btn) {
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.title = 'Exam not yet started';
+        }
+    }
+});
+  </script>
 </head>
 <body>
   <div class="container">
