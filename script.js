@@ -42,7 +42,7 @@ function submitExam() {
  sendToSheet(name, roll, score);
 }
   function sendToSheet(name, roll, score) {
-  const scriptURL = "https://script.google.com/macros/s/AKfycbyLFlR4UNjavRDcd7rAFFOBwtC2JfN7mWNaEA_WZHwqOaXrOGaFZnegi8xsbBR1xuBx/exec"; // your Apps Script URL
+  const scriptURL = "https://script.google.com/macros/s/AKfycbxek_kBWzmNXVS1P5W6UCmP4MdtgMR8kpUqP9huohfcvTya7YxcSbIhIUNF4i6mPhCz/exec"; // your Apps Script URL
 
   fetch(scriptURL, {
     method: "POST",
