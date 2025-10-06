@@ -35,7 +35,7 @@ function submitExam() {
   window.finalScore = score;
 }
 function sendToSheet(name, roll, score) {
-  const scriptURL = "hhttps://script.google.com/macros/s/AKfycbyLFlR4UNjavRDcd7rAFFOBwtC2JfN7mWNaEA_WZHwqOaXrOGaFZnegi8xsbBR1xuBx/exec"; // your Apps Script URL
+  const scriptURL = "https://script.google.com/macros/s/AKfycbyLFlR4UNjavRDcd7rAFFOBwtC2JfN7mWNaEA_WZHwqOaXrOGaFZnegi8xsbBR1xuBx/exec"; // your Apps Script URL
 
   fetch(scriptURL, {
     method: "POST",
