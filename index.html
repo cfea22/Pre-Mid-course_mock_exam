@@ -37,37 +37,18 @@
   <script src="script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-  // Set exam start and end times (example: 2:00–3:00 PM, Oct 7, 2025)
-  const examStart = new Date("October 7, 2025 14:00:00").getTime();
   const examEnd = new Date("October 7, 2025 15:00:00").getTime();
-
   const now = new Date().getTime();
-  const startBtn = document.getElementById("startExamBtn");
-  const timer = document.getElementById("timer");
 
-  if (now < examStart) {
-    const diff = examStart - now;
-    const countdown = setInterval(() => {
-      const remaining = examStart - new Date().getTime();
-      if (remaining <= 0) {
-        clearInterval(countdown);
-        location.reload(); // auto refresh when exam starts
-      } else {
-        const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((remaining % (1000 * 60)) / 1000);
-        timer.textContent = `Exam starts in: ${mins}m ${secs}s`;
-      }
-    }, 1000);
-  } 
-  else if (now > examEnd) {
-    startBtn.disabled = true;
-    startBtn.style.background = "#ccc";
-    startBtn.textContent = "Exam Over";
-    timer.style.color = "red";
-    timer.textContent = "The exam has ended. You can no longer start.";
-  } 
-  else {
-    timer.textContent = "Exam is live! You can start now.";
+  const btn = document.getElementById("startExamBtn");
+  const msg = document.getElementById("timer");
+
+  if (now > examEnd) {
+    btn.disabled = true;
+    btn.style.opacity = "0.6";
+    btn.style.cursor = "not-allowed";
+    msg.style.color = "red";
+    msg.textContent = "Exam is over. You cannot start now.";
   }
 </script>
 </body>
