@@ -36,41 +36,39 @@
   <script src="questions.js"></script>
   <script src="script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<div id="countdown" style="color: red; font-weight: bold; margin: 10px 0;"></div>
-
 <script>
-function checkExamTime() {
-    const startBtn = document.querySelector('button');
-    const countdownDiv = document.getElementById('countdown');
-    const examTime = new Date('October 7, 2025 13:45:00').getTime();
-    
-    const timer = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = examTime - now;
-        
-        if (distance <= 0) {
-            clearInterval(timer);
-            startBtn.disabled = false;
-            startBtn.style.opacity = '1';
-            startBtn.style.cursor = 'pointer';
-            countdownDiv.innerHTML = 'Exam is now available!';
-        } else {
-            startBtn.disabled = true;
-            startBtn.style.opacity = '0.6';
-            startBtn.style.cursor = 'not-allowed';
-            
-            // Calculate days, hours, minutes, seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            countdownDiv.innerHTML = `Exam starts in: ${hours}h ${minutes}m ${seconds}s`;
-        }
-    }, 1000);
-}
+  // Set exam start and end times (example: 2:00–3:00 PM, Oct 7, 2025)
+  const examStart = new Date("October 7, 2025 14:00:00").getTime();
+  const examEnd = new Date("October 7, 2025 15:00:00").getTime();
 
-window.onload = checkExamTime;
+  const now = new Date().getTime();
+  const startBtn = document.getElementById("startExamBtn");
+  const timer = document.getElementById("timer");
+
+  if (now < examStart) {
+    const diff = examStart - now;
+    const countdown = setInterval(() => {
+      const remaining = examStart - new Date().getTime();
+      if (remaining <= 0) {
+        clearInterval(countdown);
+        location.reload(); // auto refresh when exam starts
+      } else {
+        const mins = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((remaining % (1000 * 60)) / 1000);
+        timer.textContent = `Exam starts in: ${mins}m ${secs}s`;
+      }
+    }, 1000);
+  } 
+  else if (now > examEnd) {
+    startBtn.disabled = true;
+    startBtn.style.background = "#ccc";
+    startBtn.textContent = "Exam Over";
+    timer.style.color = "red";
+    timer.textContent = "The exam has ended. You can no longer start.";
+  } 
+  else {
+    timer.textContent = "Exam is live! You can start now.";
+  }
 </script>
 </body>
 </html>
